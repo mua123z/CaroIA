@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/CaroIA/static/css/main.f7dc0faf.css",
+    "main.js": "/CaroIA/static/js/main.10225712.js",
+    "static/js/453.ad6eb26e.chunk.js": "/CaroIA/static/js/453.ad6eb26e.chunk.js",
+    "index.html": "/CaroIA/index.html",
+    "main.f7dc0faf.css.map": "/CaroIA/static/css/main.f7dc0faf.css.map",
+    "main.10225712.js.map": "/CaroIA/static/js/main.10225712.js.map",
+    "453.ad6eb26e.chunk.js.map": "/CaroIA/static/js/453.ad6eb26e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f7dc0faf.css",
+    "static/js/main.10225712.js"
+  ]
+}
