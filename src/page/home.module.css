@@ -1,0 +1,44 @@
+.all{
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* Gradient xanh đen */
+    font-family: 'Segoe UI', sans-serif;
+    color: rgb(188, 54, 54);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 150px;
+    align-items: center;
+}
+
+.chon {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.bt {
+    width: 200px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #00c9ff, #92fe9d); /* màu xanh mát */
+    border-radius: 15px;
+    padding: 5px 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bt:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #00b3e6, #7dffb0);
+}
+
+
