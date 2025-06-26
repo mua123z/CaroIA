@@ -1,11 +1,59 @@
 .all{
-    margin: 0;
+    margin-bottom: 50px;
     padding-top: 20px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     /* justify-content: center; */
     flex-direction: column;
-    background-image: ();
     height: 690px;
+    width: 100%;
 }
+
+.contens{
+    display: flex;
+    gap: 30px;
+    justify-content: flex-end;
+    
+}
+
+.chon{
+    padding-top: 20px;
+}
+
+.chucnang{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+.chucnang button{
+    width: 110px;
+    height: 35px;
+    background-color: rgb(78, 96, 96);
+    border-radius: 10px;
+    color: aliceblue;
+    border: none;
+}
+
+.tohome{
+    width: 110px;
+    height: 35px;
+    background-color: rgb(78, 96, 96);
+    border-radius: 10px;
+    color: aliceblue;
+    border: none;
+    padding: 7px  0  0 35px;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.chucnang button:hover, 
+.tohome:hover{
+    background-color: rgb(80, 163, 236);
+    cursor: pointer;
+}
+
+

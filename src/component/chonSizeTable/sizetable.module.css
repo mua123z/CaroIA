@@ -1,0 +1,20 @@
+.all{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chon{
+    width: 95px;
+    height: 35px;
+    background-color: rgb(78, 96, 96);
+    border-radius: 10px;
+    color: aliceblue;
+    padding: 7px  0  0 30px;
+    box-sizing: border-box;
+}
+
+.chon:hover{
+    cursor: pointer;
+    background-color: rgb(84, 84, 66);
+}

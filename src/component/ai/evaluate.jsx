@@ -1,6 +1,6 @@
 import CheckWin from "../checkWinLost";
 
-function Evaluate(board) {
+function Evaluate(board, condition) {
     const lines = [
         [0, 1],  // ngang →
         [1, 0],  // dọc ↓

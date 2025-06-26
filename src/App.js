@@ -3,6 +3,7 @@ import Home from './page/home';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NgvsMay from './page/nguoivsmay';
 import MayvsMay from './page/mayvsmay';
+import NgvsNg from './page/ngvsng';
 
 
 function App() {
@@ -10,8 +11,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
+        <Route path='ngvsng' element={<NgvsNg/>}></Route>
         <Route path='ng-vs-may' element={<NgvsMay/>}></Route>
-        <Route path='may-vs-may' element={<MayvsMay/>}></Route>
+        {/* <Route path='may-vs-may' element={<MayvsMay/>}></Route> */}
       </Routes>
     </BrowserRouter>
   );

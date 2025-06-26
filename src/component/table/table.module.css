@@ -1,5 +1,5 @@
 .table {
-  margin-top: 50px;
+  margin-top: 20px;
   width: max-content;
   height: max-content;
   padding: 10px;
@@ -13,8 +13,8 @@
 }
 
 .cell {
-  width: 36px;
-  height: 36px;
+  width: 35px;
+  height: 35px;
   margin: 0.5px;
   font-size: 24px;
   text-align: center;

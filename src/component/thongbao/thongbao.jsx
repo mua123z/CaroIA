@@ -1,8 +1,8 @@
 import style from "./thongbao.module.css"
 
 function Thongbao({tb, onReset}){
-   
     return (
+        
         (tb === "banthang" || tb === "maythang" || tb === "hoa") && (
             <div className={style.all}>
             <div className={style.thongbao}>
