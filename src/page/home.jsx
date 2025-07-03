@@ -6,7 +6,8 @@ import style from "./home.module.css"
 function Home(){
     return(
         <div className={`${style.all}`}>
-            <h1>WELCOME TO CARO</h1>
+            <h1>TRÍ TUỆ NHÂN TẠO, NHÓM 11</h1>
+            <h2>WELCOME TO CARO</h2>
             
             <div className={`${style.chon}`}>
                 <Link to="ngvsng" className={`${style.bt}`}>

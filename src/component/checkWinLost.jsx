@@ -53,7 +53,7 @@ function CheckWin(board, i, j, value, condition) { // <== thêm `condition`
     const hangCheoChinh = dem(board , i, j, value, -1, -1) + dem(board, i, j, value, 1, 1) - 1;
     const hangCheoPhu = dem(board , i, j, value, -1, 1) + dem(board, i, j, value, 1, -1) - 1;
 
-    console.log("Đếm:", hangNgang, hangDoc, hangCheoChinh, hangCheoPhu);
+    //console.log("Đếm:", hangNgang, hangDoc, hangCheoChinh, hangCheoPhu);
 
     return (
         hangNgang >= condition ||

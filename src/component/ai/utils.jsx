@@ -3,10 +3,12 @@ function GetAvailableMoves(board) {
     const directions = [-1, 0, 1];
     const row = board.length;
     const col = board[0].length;
+    let found = false;
 
     for (let i = 0; i < row; i++) {
         for (let j = 0; j < col; j++) {
             if (board[i][j] !== "") {
+                found = true; // ✅ phát hiện có quân cờ rồi
                 for (let dx of directions) {
                     for (let dy of directions) {
                         const ni = i + dx;
@@ -19,6 +21,17 @@ function GetAvailableMoves(board) {
                             moves.add(`${ni},${nj}`);
                         }
                     }
+                }
+            }
+        }
+    }
+
+    // ✅ Nếu chưa có quân nào → return toàn bộ ô trống
+    if (!found) {
+        for (let i = 0; i < row; i++) {
+            for (let j = 0; j < col; j++) {
+                if (board[i][j] === "") {
+                    moves.add(`${i},${j}`);
                 }
             }
         }

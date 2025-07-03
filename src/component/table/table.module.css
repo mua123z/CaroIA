@@ -34,3 +34,31 @@
   color: #1a1a1a;
   box-shadow: 0 0 2px rgb(255, 255, 255), inset 0 0 5px rgb(255, 56, 56);
 }
+
+.highlight{
+  color: red;
+}
+
+.mayGoiY {
+  background-color: #f8ff2f;
+  animation: pulse 0.9s infinite;
+  color: #000000;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0.8);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 12px 3px rgba(255, 215, 0, 0.8); /* vàng gold */
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(47, 0, 255, 0.5);
+    transform: scale(1);
+  }
+}

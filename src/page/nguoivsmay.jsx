@@ -48,14 +48,21 @@ function NgvsMay(){
         setBoard(newBoard);
         setHistory([]);
         setThongBao("");
+        setKq(false)
     }
 
     //hàm reset bàn cờ về trạng thái ban đầu
     function ResetBoard(){
         //reset bảng
         const newBoard = Array(row).fill().map(() => Array(col).fill(""))
+
+        //cập nhật lại trạng thái undo
+        setCanUndo(false)
         //cập nhật bảng
         setBoard(newBoard);
+
+        //cập nhật kết qur ván đấu
+        setKq(false);
         // ẩn thông báo
         setThongBao("")
     }
@@ -69,91 +76,118 @@ function NgvsMay(){
             setHistory(newHistory);
             setThongBao("");
             setCanUndo(false); // KHÔNG cho Undo tiếp
-        } else {
+        }else if(kq){
+            alert("Ván đấu đã kết thúc");
+        }else{
             alert("Không thể Undo thêm nữa.");
         }
     }
 
+    //biến higlight quân cờ sau mỗi nước đi mới nhất
+    const [lastMove, setLastMove] = useState(null); // [i, j]
 
-    //xử lí khi người dùng dánh đầu tiên
+    //biến lưu kết quả thắng thua
+    const [kq, setKq] = useState(false)
+
+    //xử lí khi người  dánh đầu tiên
     function handleClick(i,j){
+        if(kq){
+            alert("Ván đấu đã kết thúc");
+            return;
+        }
         
         if (board[i][j] !== ""){
             alert("Vị trí đã được chọn!! Vui lòng chọn vị trí khác")
         }else{
-            console.log("bạn đi")
-            const newBoard = board.map((r) => [...r]);
-            newBoard[i][j] = "X";
-            setBoard(newBoard);
-            setHistory((prev) => [...prev, newBoard]); // lưu sau lượt người
-            setCanUndo(true); // cho phép undo sau lượt mới
-            //console.log(condition)
+            const newBoardHuman = board.map((r) => [...r]);
+            newBoardHuman[i][j] = "X";
+            setLastMove([i, j]);
+            setBoard(newBoardHuman);
+            setHistory((prev) => [...prev, newBoardHuman]);
+            setCanUndo(true);
 
-            // gọi hàm kiểm tra thắng thua
-            const isWin = CheckWin(newBoard, i, j, "X", condition);
+            const isWin = CheckWin(newBoardHuman, i, j, "X", condition);
             if (isWin) {
-                setBoard(newBoard);
-                setThongBao("banthang")
-                //console.log(thongbao)
-            return;
-            }
-            
-            //kiểm tra hòa
-            if(CheckHoa(newBoard)){
-                setBoard(newBoard);
-                setThongBao("hoa")
+                setThongBao("banthang");
+                setKq(true);
                 return;
             }
 
-            //gọi hàm máy chơi sau khi người chơi chơi
-            setTimeout(()=>{
-                const bot = Ai(newBoard)
-                if(bot){
-                    const [botI, botJ] = bot;
-                    console.log("máy đi");
+            if (CheckHoa(newBoardHuman)) {
+                setThongBao("hoa");
+                setKq(true)
+                return;
+            }
 
-                    const newBoard2 = newBoard.map((r) => [...r]);
-                    newBoard2[botI][botJ] = "O";
-                    
-                    //kiemr tra thắng thua
-                    const botWin = CheckWin(newBoard2, botI, botJ, "O", condition);
-                    if(botWin){
-                        setBoard(newBoard2);
-                        setThongBao("maythang")
-                        return;
-                    }
-                    //kiểm tra hòa
-                    if(CheckHoa(newBoard2)){
-                        setBoard(newBoard2);
-                        setThongBao("hoa")
-                        return;
-                    }
+            // 🧠 gọi AI với đúng bàn mới
+            setTimeout(() => {
+                if (thongbao) return;
 
-                    setBoard(newBoard2);
-                    setBoard(newBoard2);
-                    setHistory((prev) => [...prev, newBoard2]); // lưu sau lượt máy
+                const botMove = Ai(newBoardHuman, condition);
 
+                if (
+                    !botMove ||
+                    !Array.isArray(botMove) ||
+                    botMove.length !== 2 ||
+                    typeof botMove[0] !== "number" ||
+                    typeof botMove[1] !== "number"
+                ) {
+                    console.warn("⚠️ Không tìm thấy nước đi hợp lệ cho máy.");
+                    return;
                 }
-            }, 500)// máy đi sau khi người đi 0,5s
+
+                const [botI, botJ] = botMove;
+
+                if (newBoardHuman[botI][botJ] !== "") {
+                    console.warn("⚠️ Máy định đánh vào ô đã có người!");
+                    return;
+                }
+
+                const newBoard2 = newBoardHuman.map((r) => [...r]);
+                newBoard2[botI][botJ] = "O";
+                setLastMove([botI, botJ]);
+
+                if (CheckWin(newBoard2, botI, botJ, "O", condition)) {
+                    setBoard(newBoard2);
+                    setThongBao("maythang")
+                    setKq(true);
+                    return;
+                }
+
+                if (CheckHoa(newBoard2)) {
+                    setBoard(newBoard2);
+                    setThongBao("hoa")
+                    setKq(true);
+                    return;
+                }
+
+                setBoard(newBoard2);
+                setHistory((prev) => [...prev, newBoard2]);
+            }, 0);
         }
     }
 
     return (
         <div className={`${style.all}`}>
-            <h2>Người với máy</h2>
-            <Thongbao tb={thongbao} onReset={ResetBoard}/>
+            <div className={`${style.nenmo}`}></div>
+            <h1>Người với máy</h1>
+            <Thongbao tb={thongbao} onReset={ResetBoard} onClose={()=>{setThongBao(""); setCanUndo(false)}}/>
 
             <div className={`${style.contens}`}>
                 <div className={`${style.chon}`}>
                     <SizeTable onSelectSize={handleSizeChange}/>
                 </div>
+                
+                {/* hiển thị bàn cờ */}
                 <div className={`${style.table}`}>
-                    <Bando board={board} onCellClick={handleClick}/>
+                    <Bando board={board} onCellClick={handleClick} lastMove={lastMove}/>
                 </div>
+
                 <div className={`${style.chucnang}`}>
                     <Link to="/" className={`${style.tohome}`}>Home</Link>
-                    <button onClick={ResetBoard}>New game</button>
                     <button onClick={handleUndo}>Undo</button>
+                    <button onClick={ResetBoard}>New game</button>
+                    
                 </div>
             </div>
 
