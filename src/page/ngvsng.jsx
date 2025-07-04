@@ -108,13 +108,14 @@ function NgvsNg(){
     //biến lưu điều kiện thắng
     const [condition, setCondition] = useState(3)
 
+    const [showAI, setShowAI] = useState(true)
     //hàm thay đổi kích thước bàn cờ
     function SizeChange(size){
         setSuggest(null)
         //cập nhật điều kiện thắng
         const newCondition = size === 3 ? 3 : 5;
         setCondition(newCondition);
-
+        setShowAI(size<11)
         //cập nhật lại khích thước
         setRow(size);
         setCol(size);
@@ -125,7 +126,7 @@ function NgvsNg(){
         // cập nhật lại all các trạng thái
         setHistory([]);
         setThongBao("");
-        setKq(false)
+        setKq(false);
     }
 
     //biến higlight quân cờ sau mỗi nước đi
@@ -196,36 +197,26 @@ function NgvsNg(){
 
     //hàm máy gọi ý nước đi
     function handleSuggestMove() {
-    if (kq) {
-        alert("Ván đấu đã kết thúc.");
-        return;
+        if (kq) {
+            alert("Ván đấu đã kết thúc.");
+            return;
+        }
+
+        if (start !== 1) {
+            alert("Hãy click Start để bắt đầu chơi");
+            return;
+        }
+
+        const suggestion = Ai(board, condition, play); // <-- Sửa dòng này
+        if (!suggestion) {
+            alert("Không tìm được gợi ý.");
+            return;
+        }
+
+        const [i, j] = suggestion;
+        //trả về vị trí AI gợi ý
+        setSuggest([i, j])
     }
-
-    if (start !== 1) {
-        alert("Hãy click Start để bắt đầu chơi");
-        return;
-    }
-
-    const suggestion = Ai(board, condition, play); // <-- Sửa dòng này
-    if (!suggestion) {
-        alert("Không tìm được gợi ý.");
-        return;
-    }
-
-    const [i, j] = suggestion;
-    // const newBoard = board.map(row => [...row]);
-    // //setSuggest(newBoard[i][j] = " ")
-    // //newBoard[i][j] ="?";
-    // const a = newBoard[i][j] = "?";
-    
-    // setBoard(newBoard);
-    //setSuggest(suggestion)
-    setSuggest([i, j])
-    //alert(`👉 Gợi ý: Bạn nên đi ô hàng ${i + 1}, cột ${j + 1}`);
-
-    // Có thể thêm hiệu ứng highlight nếu muốn
-    //setLastMove([i, j]); // dùng highlight đã có sẵn
-}
 
 
     
@@ -251,7 +242,9 @@ function NgvsNg(){
                     <div className={`${style.cn} d-flex  flex-column`}>
                         <Link to="/">Home</Link>
                         <button onClick={Undo}>Undo</button>
-                        <button onClick={handleSuggestMove}>AI gợi ý</button>
+                        {showAI && (
+                            <button onClick={handleSuggestMove} id="ai">AI gợi ý</button>
+                        )}
                         <button onClick={ResetBoard}>Reset game</button>
                     </div>
                 </div>

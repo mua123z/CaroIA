@@ -16,7 +16,7 @@ function Minimax(board, depth, isMaximizing, alpha, beta, lastMove, condition, a
     }
 
     if (depth === 0 || CheckHoa(board)) {
-        return Evaluate(board, condition);
+        return Evaluate(board, condition, aiSymbol);
     }
 
     const moves = GetAvailableMoves(board);
@@ -48,4 +48,4 @@ function Minimax(board, depth, isMaximizing, alpha, beta, lastMove, condition, a
     }
 }
 
-export default Minimax
+export default Minimax;

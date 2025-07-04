@@ -1,10 +1,10 @@
-import Minimax from "../ai/minimax";
+import Minimax from "../aigoiy/minimax";
 import GetAvailableMoves from "../ai/utils";
 import CheckWin from "../checkWinLost";
 
 function Ai(board, condition, symbol) {
     const opponent = symbol === "O" ? "X" : "O";
-    const depth = board.length <= 3 ? 6 : board.length <= 11 ? 2 : 1;
+    const depth = board.length <= 3 ? 6 : board.length <= 11 ? 1 : 1;
     const moves = GetAvailableMoves(board);
     let bestMove = null;
     let bestScore = -Infinity;
