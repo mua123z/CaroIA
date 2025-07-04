@@ -78,8 +78,10 @@ function NgvsMay(){
             setCanUndo(false); // KHÔNG cho Undo tiếp
         }else if(kq){
             alert("Ván đấu đã kết thúc");
+        }else if(history.length===0){
+            alert("Không có nước đi nào để Undo");
         }else{
-            alert("Không thể Undo thêm nữa.");
+            alert("Không thể Undo thêm được nữa.")
         }
     }
 

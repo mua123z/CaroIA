@@ -19,7 +19,7 @@ function Ai(board, condition, symbol) {
         board[i][j] = "";
     }
 
-    // 2. Chặn đối thủ chuẩn bị thắng
+    // 2. Chặn đối thủ thắng ngay
     for (const [i, j] of moves) {
         board[i][j] = opponent;
         if (CheckWin(board, i, j, opponent, condition)) {
@@ -29,7 +29,24 @@ function Ai(board, condition, symbol) {
         board[i][j] = "";
     }
 
-    // 3. Minimax
+    // 3. Ưu tiên chặn thế mạnh của đối thủ (các đường dài gần thắng)
+    let blockMove = null;
+    let maxBlockScore = -Infinity;
+    for (const [i, j] of moves) {
+        board[i][j] = opponent;
+        const score = Minimax(board, 1, false, -Infinity, Infinity, [i, j], condition, opponent);
+        board[i][j] = "";
+        if (score > maxBlockScore) {
+            maxBlockScore = score;
+            blockMove = [i, j];
+        }
+    }
+
+    if (blockMove) {
+        return blockMove;
+    }
+
+    // 4. Nếu không cần chặn, dùng Minimax để tấn công
     for (const [i, j] of moves) {
         board[i][j] = symbol;
         const score = Minimax(board, depth, false, -Infinity, Infinity, [i, j], condition, symbol);
@@ -43,4 +60,4 @@ function Ai(board, condition, symbol) {
     return bestMove;
 }
 
-export default Ai
+export default Ai;

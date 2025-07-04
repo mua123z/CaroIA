@@ -11,18 +11,18 @@ function Evaluate(board, condition) {
     const row = board.length;
     const col = board[0].length;
 
-    function countLine(i, j, dx, dy, symbol) {
-        let count = 0;
-        for (let step = 0; step < 5; step++) {
-            const x = i + step * dx;
-            const y = j + step * dy;
-            if (x < 0 || y < 0 || x >= row || y >= col || board[x][y] !== symbol) {
-                return 0;
-            }
-        }
-        // 5 quân liên tiếp
-        return 5;
-    }
+    // function countLine(i, j, dx, dy, symbol) {
+    //     let count = 0;
+    //     for (let step = 0; step < 5; step++) {
+    //         const x = i + step * dx;
+    //         const y = j + step * dy;
+    //         if (x < 0 || y < 0 || x >= row || y >= col || board[x][y] !== symbol) {
+    //             return 0;
+    //         }
+    //     }
+    //     // 5 quân liên tiếp
+    //     return 5;
+    // }
 
     function scoreLine(i, j, dx, dy) {
         //let score = 0;
@@ -37,12 +37,12 @@ function Evaluate(board, condition) {
         }
 
         if (X > 0 && O > 0) return 0; // Bị chặn cả hai bên → không tính
-        if (O === condition) return 1000;
+        if (O === condition) return 10000;
         if (O === condition - 1) return 1000;
         if (O === condition - 2) return 100;
         if (O === condition - 3) return 10;
 
-        if (X === condition) return -1000;
+        if (X === condition) return -10000;
         if (X === condition - 1) return -1000;
         if (X === condition - 2) return -100;
         if (X === condition - 3) return -10;

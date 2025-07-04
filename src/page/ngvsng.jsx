@@ -110,6 +110,7 @@ function NgvsNg(){
 
     //hàm thay đổi kích thước bàn cờ
     function SizeChange(size){
+        setSuggest(null)
         //cập nhật điều kiện thắng
         const newCondition = size === 3 ? 3 : 5;
         setCondition(newCondition);
