@@ -4,9 +4,9 @@ import CheckWin from "../checkWinLost";
 
 function Ai(board, condition) {
     const depth = board.length <= 3 ? 6 : board.length <= 11 ? 1 : 1;
-    const moves = GetAvailableMoves(board);
-    let bestMove = null;
-    let bestScore = -Infinity;
+    const moves = GetAvailableMoves(board);//Gọi hàm lấy danh sách các ô trống quoanh quân cờ đã đánh
+    let bestMove = null; //nước đi tốt nhất AI chon
+    let bestScore = -Infinity; //đểm cao nhất của nước đi đó
 
     // Ưu tiên nước THẮNG NGAY
     for (const [i, j] of moves) {

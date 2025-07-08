@@ -3,7 +3,7 @@
     padding: 0;
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* Gradient xanh đen */
     font-family: 'Segoe UI', sans-serif;
-    color: rgb(188, 54, 54);
+    color: rgb(255, 255, 255);
     min-height: 100vh;
     display: flex;
     flex-direction: column;

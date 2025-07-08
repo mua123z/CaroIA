@@ -21,7 +21,7 @@ function Minimax(board, depth, isMaximizing, alpha, beta, lastMove, condition) {
     }
 
     const moves = GetAvailableMoves(board);
-
+ 
     if (isMaximizing) {
         let maxEval = -Infinity;
         for (const [i, j] of moves) {

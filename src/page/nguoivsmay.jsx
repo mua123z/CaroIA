@@ -105,7 +105,8 @@ function NgvsMay(){
             newBoardHuman[i][j] = "X";
             setLastMove([i, j]);
             setBoard(newBoardHuman);
-            setHistory((prev) => [...prev, newBoardHuman]);
+            setHistory((prev) => [...prev, newBoardHuman.map(r => [...r])]);
+
             setCanUndo(true);
 
             const isWin = CheckWin(newBoardHuman, i, j, "X", condition);
@@ -164,7 +165,8 @@ function NgvsMay(){
                 }
 
                 setBoard(newBoard2);
-                setHistory((prev) => [...prev, newBoard2]);
+                setHistory((prev) => [...prev, newBoard2.map(r => [...r])]);
+
             }, 0);
         }
     }
