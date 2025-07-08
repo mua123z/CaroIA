@@ -5,10 +5,11 @@ function GetAvailableMoves(board) {
     const col = board[0].length;
     let found = false;
 
+    // ✅ Duyệt bàn cờ, tìm các ô trống lân cận quân cờ
     for (let i = 0; i < row; i++) {
         for (let j = 0; j < col; j++) {
             if (board[i][j] !== "") {
-                found = true; // ✅ phát hiện có quân cờ rồi
+                found = true; // Có quân cờ rồi
                 for (let dx of directions) {
                     for (let dy of directions) {
                         const ni = i + dx;
@@ -26,7 +27,7 @@ function GetAvailableMoves(board) {
         }
     }
 
-    // ✅ Nếu chưa có quân nào → return toàn bộ ô trống
+    // ✅ Nếu bàn cờ còn trống hoàn toàn → cho phép đi bất kỳ ô nào
     if (!found) {
         for (let i = 0; i < row; i++) {
             for (let j = 0; j < col; j++) {
@@ -37,7 +38,20 @@ function GetAvailableMoves(board) {
         }
     }
 
-    return Array.from(moves).map(s => s.split(",").map(Number));
+    // ✅ Chuyển Set về mảng tọa độ
+    let result = Array.from(moves).map(s => s.split(",").map(Number));
+
+    // ✅ Ưu tiên ô giữa nếu là bàn 3x3
+    if (row === 3 && col === 3) {
+        const center = [1, 1]; // Tọa độ giữa
+        result.sort((a, b) => {
+            const distA = Math.abs(a[0] - center[0]) + Math.abs(a[1] - center[1]);
+            const distB = Math.abs(b[0] - center[0]) + Math.abs(b[1] - center[1]);
+            return distA - distB; // Gần trung tâm hơn sẽ lên trước
+        });
+    }
+
+    return result;
 }
 
 export default GetAvailableMoves;

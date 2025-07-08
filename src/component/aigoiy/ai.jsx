@@ -51,15 +51,7 @@ function Ai(board, condition, symbol) {
         board[i][j] = symbol;
         const score = Minimax(board, depth, false, -Infinity, Infinity, [i, j], condition, symbol);
         board[i][j] = "";
-
-        if (
-            score > bestScore || 
-            (
-                score === bestScore && 
-                board.length === 3 && board[0].length === 3 && 
-                i === 1 && j === 1 // Ưu tiên ô giữa
-            )
-        ) {
+        if (score > bestScore) {
             bestScore = score;
             bestMove = [i, j];
         }
