@@ -5,7 +5,7 @@ function GetAvailableMoves(board) {
     const col = board[0].length;
     let found = false;
 
-    // ✅ Duyệt bàn cờ, tìm các ô trống lân cận quân cờ
+    // Duyệt bàn cờ, tìm các ô trống lân cận quân cờ
     for (let i = 0; i < row; i++) {
         for (let j = 0; j < col; j++) {
             if (board[i][j] !== "") {
@@ -27,7 +27,7 @@ function GetAvailableMoves(board) {
         }
     }
 
-    // ✅ Nếu bàn cờ còn trống hoàn toàn → cho phép đi bất kỳ ô nào
+    // Nếu bàn cờ còn trống hoàn toàn → cho phép đi bất kỳ ô nào
     if (!found) {
         for (let i = 0; i < row; i++) {
             for (let j = 0; j < col; j++) {
@@ -38,10 +38,10 @@ function GetAvailableMoves(board) {
         }
     }
 
-    // ✅ Chuyển Set về mảng tọa độ
+    // Chuyển Set về mảng tọa độ
     let result = Array.from(moves).map(s => s.split(",").map(Number));
 
-    // ✅ Ưu tiên ô giữa nếu là bàn 3x3
+    //  Ưu tiên ô giữa nếu là bàn 3x3
     if (row === 3 && col === 3) {
         const center = [1, 1]; // Tọa độ giữa
         result.sort((a, b) => {

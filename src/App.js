@@ -2,9 +2,7 @@ import Home from './page/home';
 //import logo from './logo.svg';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NgvsMay from './page/nguoivsmay';
-import MayvsMay from './page/mayvsmay';
 import NgvsNg from './page/ngvsng';
-
 
 function App() {
   return (

@@ -4,6 +4,8 @@ import CheckWin from "../checkWinLost";
 
 function Ai(board, condition, symbol) {
     const opponent = symbol === "O" ? "X" : "O";
+
+    //độ sâu nếu bàn 3x3 thì độ sâu là 6 nếu bàn 11 và 15 thì độ sâu = 1
     const depth = board.length <= 3 ? 6 : board.length <= 11 ? 1 : 1;
     const moves = GetAvailableMoves(board);
     let bestMove = null;

@@ -7,7 +7,7 @@ function Minimax(board, depth, isMaximizing, alpha, beta, lastMove, condition) {
     // Nếu vừa có nước đi trước đó
     if (lastMove) {
         const [i, j] = lastMove;
-        const symbol = isMaximizing ? "O" : "X"; // ✅ Đúng chiều đánh của lượt trước
+        const symbol = isMaximizing ? "O" : "X"; //  Đúng chiều đánh của lượt trước
 
         if (CheckWin(board, i, j, symbol, condition)) {
             return symbol === "O" ? 10000 - depth : -10000 + depth;

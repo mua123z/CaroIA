@@ -12,7 +12,7 @@ function Evaluate(board, condition) {
 
     function scoreLine(i, j, dx, dy) {
         if (isSmallBoard) {
-            // 🎯 Đơn giản cho bàn 3x3
+            //  Đơn giản cho bàn 3x3
             let X = 0, O = 0;
             for (let step = 0; step < condition; step++) {
                 const x = i + step * dx;
@@ -38,7 +38,7 @@ function Evaluate(board, condition) {
             return 0;
         }
 
-        // 🤖 Nâng cao cho bàn lớn
+        //  Nâng cao cho bàn lớn
         let X = 0, O = 0;
         let blockX = 0, blockO = 0;
 
@@ -68,29 +68,29 @@ function Evaluate(board, condition) {
                 else blockO++;
             }
         }
-
+        // kiểm tra nếu bị vahwnj 2 đầu thì trả về 0
         if ((X > 0 && O > 0) || (X > 0 && blockX === 2) || (O > 0 && blockO === 2)) return 0;
 
-        if (O > 0 && X === 0) {
+        if (O > 0 && X === 0) { //kiểm tra xem khoogn bị chặn hay chặn 1 đầu
             if (blockO === 0) {
                 if (O === condition) return 10000;
                 if (O === condition - 1) return 1000;
                 if (O === condition - 2) return 100;
                 if (O === condition - 3) return 10;
-            } else if (blockO === 1) {
+            } else if (blockO === 1) { //nếu bị chặn 1 đầu thì giảm điểm xuống
                 if (O === condition) return 1000;
                 if (O === condition - 1) return 100;
                 if (O === condition - 2) return 10;
             }
         }
 
-        if (X > 0 && O === 0) {
+        if (X > 0 && O === 0) {//kiểm tra xem khoogn bị chặn hay chặn 1 đầu
             if (blockX === 0) {
                 if (X === condition) return -10000;
                 if (X === condition - 1) return -1000;
                 if (X === condition - 2) return -100;
                 if (X === condition - 3) return -10;
-            } else if (blockX === 1) {
+            } else if (blockX === 1) { //nếu bị chặn 1 đầu thì giảm điểm xuống
                 if (X === condition) return -1000;
                 if (X === condition - 1) return -100;
                 if (X === condition - 2) return -10;

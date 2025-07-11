@@ -106,7 +106,8 @@ function NgvsMay(){
             setLastMove([i, j]);
             setBoard(newBoardHuman);
             setHistory((prev) => [...prev, newBoardHuman.map(r => [...r])]);
-
+            
+            //cho phép undo
             setCanUndo(true);
 
             const isWin = CheckWin(newBoardHuman, i, j, "X", condition);
@@ -122,7 +123,7 @@ function NgvsMay(){
                 return;
             }
 
-            // 🧠 gọi AI với đúng bàn mới
+            //  gọi AI với đúng bàn mới
             setTimeout(() => {
                 if (thongbao) return;
 
@@ -135,14 +136,14 @@ function NgvsMay(){
                     typeof botMove[0] !== "number" ||
                     typeof botMove[1] !== "number"
                 ) {
-                    console.warn("⚠️ Không tìm thấy nước đi hợp lệ cho máy.");
+                    console.warn(" Không tìm thấy nước đi hợp lệ cho máy.");
                     return;
                 }
 
                 const [botI, botJ] = botMove;
 
                 if (newBoardHuman[botI][botJ] !== "") {
-                    console.warn("⚠️ Máy định đánh vào ô đã có người!");
+                    console.warn(" Máy định đánh vào ô đã có người!");
                     return;
                 }
 
